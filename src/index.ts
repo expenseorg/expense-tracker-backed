@@ -3,6 +3,7 @@ import express, { Response } from 'express';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import allRoutes from './routes/index';
+import { requestLogger } from './common/middlewares/request-logger';
 
 // configure .env
 dotenv.config();
@@ -20,6 +21,12 @@ mongoose
 
 // Middleware for parsing JSON request bodies
 app.use(express.json());
+
+/**
+ * Middleware to log all request
+ * using winston
+ */
+app.use(requestLogger);
 
 // base Route
 app.get('/', (_, res: Response) => {
