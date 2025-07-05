@@ -1,0 +1,9 @@
+@baseUrl = http://localhost:3000
+##----------------------------------------------USER -----------------------------------------
+### get all the users 
+GET {{baseUrl}}/api/user
+
+##--------------------------------------------EXPENSES ----------------------------
+
+### get all the expenses
+GET {{baseUrl}}/api/expense

@@ -2,6 +2,7 @@
 import express, { Response } from 'express';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
+import allRoutes from './routes/index';
 
 // configure .env
 dotenv.config();
@@ -24,6 +25,9 @@ app.use(express.json());
 app.get('/', (_, res: Response) => {
   res.send('Hello TypeScript with Express! Enjoy');
 });
+
+// all routes
+app.use('/api', allRoutes);
 
 // Start the server
 export default app.listen(process.env.PORT, () => {
