@@ -10,10 +10,10 @@ import expenseRoute from './expense.route';
 const route = Router();
 
 // user Route
-route.use('/user', userRoute);
+route.use('/users', userRoute);
 
 //expense Route
-route.use('/expense', expenseRoute);
+route.use('/expenses', expenseRoute);
 
 // export all the routes
 export default route;

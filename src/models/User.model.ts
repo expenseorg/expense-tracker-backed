@@ -29,6 +29,7 @@ const UserSchema: Schema = new Schema(
       type: String,
       required: true,
       match: Regex.email,
+      unique: true,
     },
     profileImg: {
       type: String,
