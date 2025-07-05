@@ -1,10 +1,21 @@
 // main starting point
 import express, { Response } from 'express';
 import dotenv from 'dotenv';
+import mongoose from 'mongoose';
 
 // configure .env
 dotenv.config();
 const app = express();
+
+//connect to mongo db
+mongoose
+  .connect(process.env.MONGO_URI ?? '')
+  .then(() => {
+    console.log('Connected to DB ');
+  })
+  .catch(() => {
+    console.log('DB connection failed ');
+  });
 
 // Middleware for parsing JSON request bodies
 app.use(express.json());
