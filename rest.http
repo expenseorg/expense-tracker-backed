@@ -1,9 +1,20 @@
 @baseUrl = http://localhost:3000
 ##----------------------------------------------USER -----------------------------------------
-### get all the users 
-GET {{baseUrl}}/api/user
+### get the user details by id
+GET {{baseUrl}}/api/users/:id
+
+### Add a new user
+POST {{baseUrl}}/api/users
+Content-Type: application/json
+
+{
+  "name": "john",
+  "email": "john@gmail.com",
+  "password": "john"
+}
+
 
 ##--------------------------------------------EXPENSES ----------------------------
 
 ### get all the expenses
-GET {{baseUrl}}/api/expense
+GET {{baseUrl}}/api/expenses
