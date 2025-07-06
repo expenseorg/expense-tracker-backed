@@ -34,7 +34,6 @@ export const addUser = async (
       handleError(res, { message: 'User creation failed' });
       return;
     }
-    console.log(savedUser);
     // else send the res
     res.status(201).send({
       success: true,

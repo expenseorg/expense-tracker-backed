@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import allRoutes from './routes/index';
 import { requestLogger } from './common/middlewares/request-logger';
+import { devLogger, logger } from './common/utils/logger';
 
 // configure .env
 dotenv.config();
@@ -15,8 +16,9 @@ mongoose
   .then(() => {
     console.log('Connected to DB ');
   })
-  .catch(() => {
-    console.log('DB connection failed ');
+  .catch((err) => {
+    logger.info('DB connection failed');
+    devLogger(JSON.stringify(err, null, 2));
   });
 
 // Middleware for parsing JSON request bodies
