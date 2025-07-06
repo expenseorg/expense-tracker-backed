@@ -8,6 +8,7 @@ import { handleError } from '../common/utils/handle-error';
 import { AddUserSchemaType } from '../common/validation-schemas/users/add-user';
 import { ValidatedRequest } from '../types/custom-types';
 import { isDuplicateKeyError } from '../common/utils/mongo-errors';
+import { UpdateUserSchemaType } from '../common/validation-schemas/users/update-user';
 
 /**
  * Route to get the user details
@@ -85,5 +86,39 @@ export const deleteUser = async (req: ValidatedRequest<{}>, res: Response) => {
     handleError(res, {
       error: err,
     });
+  }
+};
+
+// update user details
+export const updateUser = async (
+  req: ValidatedRequest<UpdateUserSchemaType>,
+  res: Response
+) => {
+  // get the data from validated data
+  const validatedRequest = req.validatedData!;
+
+  console.log(validatedRequest)
+
+  try {
+    //update the user
+    const updatedUser = await User.findOneAndUpdate(
+      { _id: req.userData!._id },
+      validatedRequest,
+      { new: true } // return the updated user
+    );
+
+    if (!updatedUser) {
+      handleError(res, { message: 'User update failed' });
+      return;
+    }
+    // else send the res
+    res.status(200).send({
+      success: true,
+      data: updatedUser,
+      message: 'User updated successfully',
+    });
+  } catch (err) {
+    // catch any un expected error
+    handleError(res, { error: err });
   }
 };
