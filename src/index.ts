@@ -44,5 +44,5 @@ app.use('/api', allRoutes);
 
 // Start the server
 export default app.listen(process.env.PORT, () => {
-  console.log(`Server running at http://localhost:${process.env.PORT}`);
+  console.log(`Server running at PORT:${process.env.PORT}`);
 });

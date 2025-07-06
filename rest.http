@@ -17,6 +17,16 @@ Content-Type: application/json
 DELETE {{baseUrl}}/api/users
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NmE1NzMwNWFlZWQ4ZWE5ODE0NTAzMyIsImlhdCI6MTc1MTc5OTYwNCwiZXhwIjoxNzUxODg2MDA0fQ.d3VAmcPBmYKS2uTPb1jghB-xFzmJmVAzYuWAhhKIwoY
 
+
+### update user 
+PATCH {{baseUrl}}/api/users
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NmE1NzMwNWFlZWQ4ZWE5ODE0NTAzMyIsImlhdCI6MTc1MTc5OTYwNCwiZXhwIjoxNzUxODg2MDA0fQ.d3VAmcPBmYKS2uTPb1jghB-xFzmJmVAzYuWAhhKIwoY
+
+{
+  "name": "Big Boy"
+}
+
 ##---------------------------------------------AUTH----------------------------------------------
 ### login user 
 POST {{baseUrl}}/api/auth/login

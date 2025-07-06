@@ -1,35 +1,31 @@
 /**
- * this @file contains validation schemas for adding a user
+ * this @file contains validation schemas for updating a user
  */
 
 import { Regex } from '../../constants/regex.constants';
 import { Schema } from 'express-validator';
 
 // type
-export type AddUserSchemaType = {
-  name: string;
-  email: string;
-  password: string;
+export type UpdateUserSchemaType = {
+  name?: string;
+  email?: string;
+  password?: string;
   profileImg?: string;
   walletBalance?: number;
 };
 
 //schema
-export const AddUserSchema: Schema = {
+export const UpdateUserSchema: Schema = {
   name: {
+    optional: true,
     isString: {
       errorMessage: 'Name should be a string',
     },
-    notEmpty: {
-      errorMessage: 'Name is required',
-    },
   },
   email: {
+    optional: true,
     isString: {
       errorMessage: 'Email should be a string',
-    },
-    notEmpty: {
-      errorMessage: 'Email is required',
     },
     matches: {
       options: [Regex.email],
@@ -37,6 +33,7 @@ export const AddUserSchema: Schema = {
     },
   },
   password: {
+    optional: true,
     isString: {
       errorMessage: 'Password should be a string',
     },
@@ -55,5 +52,25 @@ export const AddUserSchema: Schema = {
       errorMessage: 'Wallet balance should be a number',
     },
     optional: true,
+  },
+  _: {
+    custom: {
+      /**
+       * Checks if at least one of the optional felids are provided
+       */
+      options: (_, { req }) => {
+        if (
+          !req.body.name &&
+          !req.body.email &&
+          !req.body.password &&
+          !req.body.walletBalance &&
+          !req.body.profileImg
+        ) {
+          return false;
+        }
+        return true;
+      },
+      errorMessage: 'Please provide at least one field to update',
+    },
   },
 };
