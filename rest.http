@@ -2,8 +2,7 @@
 ##----------------------------------------------USER -----------------------------------------
 ### get the user details by id
 GET {{baseUrl}}/api/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NmEyNTE1YzViMGZjNDg5NjBhMGU1NSIsImlhdCI6MTc1MTc5Nzc3MSwiZXhwIjoxNzUxODg0MTcxfQ.YvNUaEzp-t6M_KhYiImSRHlODznzzo_xrJAP-1nSAQk
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NmE1NzMwNWFlZWQ4ZWE5ODE0NTAzMyIsImlhdCI6MTc1MTc5OTYwNCwiZXhwIjoxNzUxODg2MDA0fQ.d3VAmcPBmYKS2uTPb1jghB-xFzmJmVAzYuWAhhKIwoY
 ### Add a new user
 POST {{baseUrl}}/api/users
 Content-Type: application/json
@@ -13,6 +12,10 @@ Content-Type: application/json
   "email": "john@gmail.com",
   "password": "john"
 }
+
+### Delete user 
+DELETE {{baseUrl}}/api/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NmE1NzMwNWFlZWQ4ZWE5ODE0NTAzMyIsImlhdCI6MTc1MTc5OTYwNCwiZXhwIjoxNzUxODg2MDA0fQ.d3VAmcPBmYKS2uTPb1jghB-xFzmJmVAzYuWAhhKIwoY
 
 ##---------------------------------------------AUTH----------------------------------------------
 ### login user 

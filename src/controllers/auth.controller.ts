@@ -9,6 +9,7 @@ import { Response } from 'express';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import { LoginUserValidationSchemaType } from '../common/validation-schemas/auth/login-user';
+import { JWT_EXPIRATION_TIME } from '../common/constants/config.constants';
 
 // this is used to login a user , return a access token
 export const login = async (
@@ -42,7 +43,7 @@ export const login = async (
 
     // generate token
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET!, {
-      expiresIn: '1d',
+      expiresIn: JWT_EXPIRATION_TIME,
     });
 
     res.status(200).json({
