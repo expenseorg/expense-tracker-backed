@@ -24,7 +24,8 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NmE1NzMwNWFlZWQ4ZWE5ODE0NTAzMyIsImlhdCI6MTc1MTc5OTYwNCwiZXhwIjoxNzUxODg2MDA0fQ.d3VAmcPBmYKS2uTPb1jghB-xFzmJmVAzYuWAhhKIwoY
 
 {
-  "name": "Big Boy"
+  "name": "Big Boy",
+  "profileImg":"https://res.cloudinary.com/dfqbhlw0b/image/upload/v1751816178/rkdqf2oymf0nwvesw0ps.jpg"
 }
 
 ##---------------------------------------------AUTH----------------------------------------------
@@ -45,3 +46,14 @@ POST {{baseUrl}}/api/auth/logout
 
 ### get all the expenses
 GET {{baseUrl}}/api/expenses
+
+
+
+##-------------------------------------------UPLOAD -------------------------
+
+### Upload an image do this in postman 
+### Create a new POST request tab.
+### body -> form data -> key = image , select file 
+### file to not be more than 1MB
+POST {{baseUrl}}/api/uploads/image
+
