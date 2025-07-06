@@ -1,30 +1,28 @@
 @baseUrl = http://localhost:3000
+@authToken = Bearer <token>
 ##----------------------------------------------USER -----------------------------------------
 ### get the user details by id
 GET {{baseUrl}}/api/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NmE1NzMwNWFlZWQ4ZWE5ODE0NTAzMyIsImlhdCI6MTc1MTc5OTYwNCwiZXhwIjoxNzUxODg2MDA0fQ.d3VAmcPBmYKS2uTPb1jghB-xFzmJmVAzYuWAhhKIwoY
+Authorization: {{authToken}}
 ### Add a new user
 POST {{baseUrl}}/api/users
 Content-Type: application/json
 
 {
-  "name": "john",
-  "email": "john@gmail.com",
-  "password": "john"
+  "name": "peter",
+  "email": "peter@gmail.com",
+  "password": "peter"
 }
 
 ### Delete user 
 DELETE {{baseUrl}}/api/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NmE1NzMwNWFlZWQ4ZWE5ODE0NTAzMyIsImlhdCI6MTc1MTc5OTYwNCwiZXhwIjoxNzUxODg2MDA0fQ.d3VAmcPBmYKS2uTPb1jghB-xFzmJmVAzYuWAhhKIwoY
-
+Authorization: {{authToken}}
 
 ### update user 
 PATCH {{baseUrl}}/api/users
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NmE1NzMwNWFlZWQ4ZWE5ODE0NTAzMyIsImlhdCI6MTc1MTc5OTYwNCwiZXhwIjoxNzUxODg2MDA0fQ.d3VAmcPBmYKS2uTPb1jghB-xFzmJmVAzYuWAhhKIwoY
-
+Authorization: {{authToken}}
 {
-  "name": "Big Boy",
   "profileImg":"https://res.cloudinary.com/dfqbhlw0b/image/upload/v1751816178/rkdqf2oymf0nwvesw0ps.jpg"
 }
 
@@ -35,18 +33,14 @@ Content-Type: application/json
 
 {
   "email": "john@gmail.com",
-  "password": "john"
+  "password": "jua"
 }
-
-### logout user
-POST {{baseUrl}}/api/auth/logout
-
 
 ##--------------------------------------------EXPENSES ----------------------------
 
 ### get all the expenses
 GET {{baseUrl}}/api/expenses
-
+Authorization: {{authToken}}
 
 
 ##-------------------------------------------UPLOAD -------------------------
@@ -56,4 +50,5 @@ GET {{baseUrl}}/api/expenses
 ### body -> form data -> key = image , select file 
 ### file to not be more than 1MB
 POST {{baseUrl}}/api/uploads/image
+Authorization: {{authToken}}
 
