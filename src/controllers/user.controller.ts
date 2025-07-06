@@ -9,8 +9,8 @@ import { AddUserSchemaType } from '../common/validation-schemas/users/add-user';
 import { ValidatedRequest } from '../types/custom-types';
 import { isDuplicateKeyError } from '../common/utils/mongo-errors';
 
-export const getUser = (_, res: Response) => {
-  res.send('get all users');
+export const getUser = (req:ValidatedRequest<{}>, res: Response) => {
+  res.send('Hello ' + req.userData?.name); ;
 };
 
 /**
@@ -34,7 +34,6 @@ export const addUser = async (
       handleError(res, { message: 'User creation failed' });
       return;
     }
-    console.log(savedUser);
     // else send the res
     res.status(201).send({
       success: true,

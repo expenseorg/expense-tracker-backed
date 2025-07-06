@@ -1,7 +1,8 @@
 @baseUrl = http://localhost:3000
 ##----------------------------------------------USER -----------------------------------------
 ### get the user details by id
-GET {{baseUrl}}/api/users/:id
+GET {{baseUrl}}/api/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NmEyNTE1YzViMGZjNDg5NjBhMGU1NSIsImlhdCI6MTc1MTc5Nzc3MSwiZXhwIjoxNzUxODg0MTcxfQ.YvNUaEzp-t6M_KhYiImSRHlODznzzo_xrJAP-1nSAQk
 
 ### Add a new user
 POST {{baseUrl}}/api/users
@@ -12,6 +13,19 @@ Content-Type: application/json
   "email": "john@gmail.com",
   "password": "john"
 }
+
+##---------------------------------------------AUTH----------------------------------------------
+### login user 
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "john@gmail.com",
+  "password": "john"
+}
+
+### logout user
+POST {{baseUrl}}/api/auth/logout
 
 
 ##--------------------------------------------EXPENSES ----------------------------

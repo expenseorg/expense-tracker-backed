@@ -4,6 +4,7 @@
 
 import { Schema, Document, model } from 'mongoose';
 import { Regex } from '../common/constants/regex.constants';
+import bcrypt from 'bcrypt';
 
 //types
 export interface IUser extends Document {
@@ -45,6 +46,20 @@ const UserSchema: Schema = new Schema(
   { timestamps: true }
 );
 
+/**
+ * Pre-save hook to hash the password if it is modified.
+ */
+UserSchema.pre<IUser>('save', async function (next) {
+  // if not modified, skip
+  if (!this.isModified('password')) return next();
+  // else we has the password
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(this.password, salt);
+  this.password = hashedPassword;
+  // call next once done
+  next();
+});
+
 // create model from the schema and export
-const User = model('User', UserSchema);
+const User = model<IUser>('User', UserSchema);
 export default User;
