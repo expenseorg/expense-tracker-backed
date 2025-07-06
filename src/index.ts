@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import allRoutes from './routes/index';
 import { requestLogger } from './common/middlewares/request-logger';
 import { devLogger, logger } from './common/utils/logger';
+import passport from './common/passport/index';
 
 // configure .env
 dotenv.config();
@@ -24,6 +25,9 @@ mongoose
 // Middleware for parsing JSON request bodies
 app.use(express.json());
 
+// in initialize passport
+app.use(passport.initialize());
+
 /**
  * Middleware to log all request
  * using winston
@@ -32,7 +36,7 @@ app.use(requestLogger);
 
 // base Route
 app.get('/', (_, res: Response) => {
-  res.send('Hello TypeScript with Express! Enjoy');
+  res.send('Hello TypeScript with Express! for Expense Tracker App');
 });
 
 // all routes

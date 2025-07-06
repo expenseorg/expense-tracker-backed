@@ -7,12 +7,13 @@ import { getUser, addUser } from '../controllers/user.controller';
 import { checkSchema } from 'express-validator';
 import { AddUserSchema } from '../common/validation-schemas/users/add-user';
 import { validate } from '../common/middlewares/handle-validation';
+import { requireAuth } from '../common/middlewares/require-auth';
 
 // initialize router
 const router = Router();
 
 // get a single  user detail
-router.get('/', getUser);
+router.get('/', requireAuth, getUser);
 
 // add a single user
 router.post('/', checkSchema(AddUserSchema), validate, addUser);
