@@ -9,8 +9,19 @@ import { AddUserSchemaType } from '../common/validation-schemas/users/add-user';
 import { ValidatedRequest } from '../types/custom-types';
 import { isDuplicateKeyError } from '../common/utils/mongo-errors';
 
-export const getUser = (req:ValidatedRequest<{}>, res: Response) => {
-  res.send('Hello ' + req.userData?.name); ;
+export const getUser = (req: ValidatedRequest<{}>, res: Response) => {
+  try {
+    // send the validated user
+    res.status(200).json({
+      success: true,
+      data: req.userData,
+    });
+  } catch (err) {
+    // this is just kept as a fail safe
+    handleError(res, {
+      error: err,
+    });
+  }
 };
 
 /**
