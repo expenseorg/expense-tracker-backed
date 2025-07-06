@@ -83,6 +83,9 @@ This is a simplified overview of the project structure. There might be more fold
   - **PATCH /expenses/:id**: Update an expense
   - **DELETE /expenses/:id**: Delete an expense
 
+- **Uploads**
+  - **POST /uploads/image**: upload a new image (can be used for profile image)
+
 ## **Logging**
 
 - **Winston configuration**:
