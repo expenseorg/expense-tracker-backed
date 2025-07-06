@@ -110,3 +110,47 @@ This is a simplified overview of the project structure. There might be more fold
   message: string
   }
 ```
+
+
+**Authentication**
+================
+
+### Overview
+
+The application uses Passport.js with JWT strategy for authentication.
+
+### Configuration
+
+* `src/common/passport/jwt.strategy.ts`: Defines the JWT strategy for Passport.
+* `src/common/passport/index.ts`: Initializes Passport and sets up the JWT strategy.
+
+### Flow
+
+1. **Login**: Verify credentials and generate JWT token.
+2. **Authenticate**: Verify JWT token on subsequent requests.
+
+### Adding Other Auth Providers
+
+Create a new strategy file (e.g., `google.strategy.ts`) and import it in `src/common/passport/index.ts`. Add the new strategy to the Passport configuration.
+
+**Example**
+```markdown
+// src/common/passport/jwt.strategy.ts
+import { PassportStatic } from 'passport';
+import { Strategy as JWTStrategy, ExtractJwt } from 'passport-jwt';
+import User from '../../models/User.model';
+
+export default (passport: PassportStatic) => {
+  passport.use(
+    new JWTStrategy(
+      {
+        jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+        secretOrKey: process.env.JWT_SECRET || 'super-secret',
+      },
+      async (jwtPayload, done) => {
+        // Verify JWT token
+      }
+    )
+  );
+};
+```
