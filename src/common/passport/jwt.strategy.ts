@@ -22,7 +22,7 @@ export default (passport: PassportStatic) => {
       async (jwtPayload, done) => {
         try {
           // find user by id
-          const user = await User.findById(jwtPayload.id);
+          const user = await User.findById(jwtPayload.id).lean().exec();
           if (!user) return done(null, false);
           // in no error return the user
           return done(null, user);
