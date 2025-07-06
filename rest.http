@@ -2,29 +2,28 @@
 ##----------------------------------------------USER -----------------------------------------
 ### get the user details by id
 GET {{baseUrl}}/api/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NmE1NzMwNWFlZWQ4ZWE5ODE0NTAzMyIsImlhdCI6MTc1MTc5OTYwNCwiZXhwIjoxNzUxODg2MDA0fQ.d3VAmcPBmYKS2uTPb1jghB-xFzmJmVAzYuWAhhKIwoY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NmFhY2I2ZDM2MGNjZjMwMjM4M2M5MiIsImlhdCI6MTc1MTgyMTUxOCwiZXhwIjoxNzUxOTA3OTE4fQ.TkczYpVg_MAmGwn9MfOWLbQhVjANy60cqf-KsWEqI_I
 ### Add a new user
 POST {{baseUrl}}/api/users
 Content-Type: application/json
 
 {
-  "name": "john",
-  "email": "john@gmail.com",
-  "password": "john"
+  "name": "peter",
+  "email": "peter@gmail.com",
+  "password": "peter"
 }
 
 ### Delete user 
 DELETE {{baseUrl}}/api/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NmE1NzMwNWFlZWQ4ZWE5ODE0NTAzMyIsImlhdCI6MTc1MTc5OTYwNCwiZXhwIjoxNzUxODg2MDA0fQ.d3VAmcPBmYKS2uTPb1jghB-xFzmJmVAzYuWAhhKIwoY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NmE1NzMwNWFlZWQ4ZWE5ODE0NTAzMyIsImlhdCI6MTc1MTgyMTQ3NCwiZXhwIjoxNzUxOTA3ODc0fQ.2715mIw6QZKw8oNprnscEeFMDh8Czln-Thq29MI5dlQ
 
 
 ### update user 
 PATCH {{baseUrl}}/api/users
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NmE1NzMwNWFlZWQ4ZWE5ODE0NTAzMyIsImlhdCI6MTc1MTc5OTYwNCwiZXhwIjoxNzUxODg2MDA0fQ.d3VAmcPBmYKS2uTPb1jghB-xFzmJmVAzYuWAhhKIwoY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NmFhY2I2ZDM2MGNjZjMwMjM4M2M5MiIsImlhdCI6MTc1MTgyMTUxOCwiZXhwIjoxNzUxOTA3OTE4fQ.TkczYpVg_MAmGwn9MfOWLbQhVjANy60cqf-KsWEqI_I
 
 {
-  "name": "Big Boy",
   "profileImg":"https://res.cloudinary.com/dfqbhlw0b/image/upload/v1751816178/rkdqf2oymf0nwvesw0ps.jpg"
 }
 

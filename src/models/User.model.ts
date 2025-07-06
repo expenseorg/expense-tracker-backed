@@ -4,7 +4,7 @@
 
 import { Schema, Document, model } from 'mongoose';
 import { Regex } from '../common/constants/regex.constants';
-import bcrypt from 'bcrypt';
+import { encrypt } from '../common/utils/hashing';
 
 //types
 export interface IUser extends Document {
@@ -53,8 +53,7 @@ UserSchema.pre<IUser>('save', async function (next) {
   // if not modified, skip
   if (!this.isModified('password')) return next();
   // else we has the password
-  const salt = await bcrypt.genSalt(10);
-  const hashedPassword = await bcrypt.hash(this.password, salt);
+  const hashedPassword = await encrypt(this.password);
   this.password = hashedPassword;
   // call next once done
   next();

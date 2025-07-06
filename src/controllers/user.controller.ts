@@ -9,6 +9,7 @@ import { AddUserSchemaType } from '../common/validation-schemas/users/add-user';
 import { ValidatedRequest } from '../types/custom-types';
 import { isDuplicateKeyError } from '../common/utils/mongo-errors';
 import { UpdateUserSchemaType } from '../common/validation-schemas/users/update-user';
+import { encrypt } from '../common/utils/hashing';
 
 /**
  * Route to get the user details
@@ -18,7 +19,13 @@ export const getUser = (req: ValidatedRequest<{}>, res: Response) => {
     // send the validated user
     res.status(200).json({
       success: true,
-      data: req.userData,
+      data: {
+        _id: req.userData?._id,
+        name: req.userData?.name,
+        email: req.userData?.email,
+        walletBalance: req.userData?.walletBalance,
+        profileImg: req.userData?.profileImg
+      },
     });
   } catch (err) {
     // this is just kept as a fail safe
@@ -97,9 +104,12 @@ export const updateUser = async (
   // get the data from validated data
   const validatedRequest = req.validatedData!;
 
-  console.log(validatedRequest)
-
   try {
+    // in case we are updating password
+    if (validatedRequest?.password) {
+      validatedRequest.password = await encrypt(validatedRequest.password);
+    }
+
     //update the user
     const updatedUser = await User.findOneAndUpdate(
       { _id: req.userData!._id },
@@ -111,6 +121,7 @@ export const updateUser = async (
       handleError(res, { message: 'User update failed' });
       return;
     }
+
     // else send the res
     res.status(200).send({
       success: true,
