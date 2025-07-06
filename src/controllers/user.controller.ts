@@ -37,6 +37,7 @@ export const addUser = async (
     console.log(savedUser);
     // else send the res
     res.status(201).send({
+      success: true,
       data: savedUser,
       message: 'User created successfully',
     });
