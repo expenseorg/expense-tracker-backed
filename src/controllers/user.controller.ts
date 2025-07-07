@@ -57,7 +57,7 @@ export const addUser = async (
       return;
     }
     // else send the res
-    res.status(201).send({
+    res.status(201).json({
       success: true,
       data: savedUser,
       message: 'User created successfully',
