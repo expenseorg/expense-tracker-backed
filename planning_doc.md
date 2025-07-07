@@ -67,6 +67,7 @@ This is a simplified overview of the project structure. There might be more fold
   - `price`: number (float)
   - `category`: string
   - `date`: Date (ISO 8601)
+  - `user`: User ref id
 
 ## **API Endpoints**
 
