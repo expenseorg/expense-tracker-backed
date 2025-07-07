@@ -57,7 +57,7 @@ export const addUser = async (
       return;
     }
     // else send the res
-    res.status(201).send({
+    res.status(201).json({
       success: true,
       data: savedUser,
       message: 'User created successfully',
@@ -84,7 +84,7 @@ export const deleteUser = async (req: ValidatedRequest<{}>, res: Response) => {
       return;
     }
     // else send the res
-    res.status(200).send({
+    res.status(200).json({
       success: true,
       message: 'User deleted successfully',
     });
@@ -123,7 +123,7 @@ export const updateUser = async (
     }
 
     // else send the res
-    res.status(200).send({
+    res.status(200).json({
       success: true,
       data: updatedUser,
       message: 'User updated successfully',
