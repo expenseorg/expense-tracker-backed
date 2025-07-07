@@ -1,149 +1,88 @@
-# How to Run the Project
+# Expense Tracker App
 
-1. **Create a `.env` file**  
-  Copy the required environment variables from `.env.example` and update them as needed.
+## Introduction
 
-2. **Start in Development Mode**  
-  For automatic reloads and TypeScript support, run:
-  ```bash
-  npm run dev
-  ```
+The Expense Tracker App is a web application designed to help users track and manage their expenses. The app is built using a modern tech stack, including Node.js, TypeScript, Express.js, and MongoDB.
 
-3. **Build and Run in Production Mode**  
-  First, compile the TypeScript code:
-  ```bash
-  npm run build
-  ```
-  This will generate JavaScript files in the `dist` folder.
+## Technologies Used
 
-  Then, start the application:
-  ```bash
-  npm run start
-  ```
+* Node.js: JavaScript runtime environment
+* TypeScript: Superset of JavaScript for building scalable and maintainable applications
+* Express.js: Popular Node.js web framework for building web applications
+* MongoDB: NoSQL database for storing and retrieving data
+* Mongoose: MongoDB object modeling tool for TypeScript
+* Express Validator: Middleware for validating user input
+* Winston: Logging library for Node.js
+* Authentication: is achieved using Passport JWT strategy
 
-> **Tip:**  
-> Use `npm run dev` for development and `npm run build && npm run start` for production.
+## Getting Started
 
-# setup express with typescript
+To clone and run the app, follow these steps:
 
-### package sto install
+### Clone the Repository
 
 ```bash
-npm install express
-npm install --save-dev jest typescript @types/node @types/express ts-node nodemon
+git clone https://github.com/your-username/expense-tracker-app.git
 ```
 
-### run
+### Install Dependencies
 
 ```bash
-npm init -y
+npm install
 ```
 
-### create typescript config
+### Create a .env File
 
-this command will create the tdconfig.json
+Create a new file named `.env` in the root directory of the project. Copy the required environment variables from `.env.example` and update them as needed.
+
+### Start in Development Mode
+
+For automatic reloads and TypeScript support, run:
 
 ```bash
-npx tsc --init
+npm run dev
 ```
 
-content of tsCotdconfig.jsonnfig file
+### Build and Run in Production Mode
 
-```json
-{
-  "compilerOptions": {
-    "target": "ES6",
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "outDir": "./dist",
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "noImplicitAny": false,
-    "resolveJsonModule": true
-  },
-  "include": ["src/**/*.ts"],
-  "exclude": ["node_modules"]
-}
-```
-
-check th pacakage.josn to be somthing like this if using src folder
-
-```json
-{
-  "name": "ts-backend",
-  "version": "1.0.0",
-  "type": "commonjs",
-  "main": "src/index.ts",
-  "scripts": {
-    "dev": "ts-node src/index.ts",
-    "build": "tsc",
-    "start": "node dist/index.js",
-    "watch": "tsc --watch"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
-  "devDependencies": {
-    "@types/express": "^5.0.1",
-    "@types/node": "^22.15.18",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.8.3"
-  },
-  "dependencies": {
-    "express": "^5.1.0"
-  }
-}
-```
-
-### Setup nodemon for continious reload
-
-create nodemon.json
-
-```json
-{
-  "watch": ["src"],
-  "ext": "ts",
-  "exec": "ts-node src/index.ts"
-}
-```
-
-# Jest set up
+First, compile the TypeScript code:
 
 ```bash
-npm install --save-dev jest ts-jest @types/jest supertest
+npm run build
 ```
 
-run this to create config file
+This will generate JavaScript files in the `dist` folder.
+
+Then, start the application:
 
 ```bash
-npx ts-jest config:init
+npm run start
 ```
 
-add script
+> **Tip:** Use `npm run dev` for development and `npm run build && npm run start` for production.
 
-```bash
-"test": "jest"
-```
+## API Endpoints
 
-now run the script
+The app provides the following API endpoints:
 
-### add prettier
+* **Users**
+	+ GET /users: Get the user details
+	+ POST /users: Create a new user
+	+ PATCH /users: Update a user
+	+ DELETE /users: Delete a user
+* **Expenses**
+	+ GET /expenses: Get a list of expenses
+	+ POST /expenses: Create a new expense
+	+ PATCH /expenses/:id: Update an expense
+	+ DELETE /expenses/:id: Delete an expense
 
-```bash
-npm i -D prettier
-```
+## Project Structure
 
-add .prettierrc file if required to change any default configs
+The project is organized into the following directories:
 
-```ts
-{
-  "semi": true,
-  "singleQuote": true,
-  "printWidth": 80,
-  "tabWidth": 2,
-  "trailingComma": "es5"
-}
-```
+* `src/`: Source code directory
+* `src/controllers/`: Controllers for handling user input and business logic
+* `src/models/`: Data models for MongoDB
+* `src/routes/`: API endpoints and routing
+* `src/utils/`: Utility functions for logging, error handling, and more
+* `tests/`: Unit tests and integration tests
