@@ -8,9 +8,31 @@ import { handleError } from '../common/utils/handle-error';
 import { AddUserSchemaType } from '../common/validation-schemas/users/add-user';
 import { ValidatedRequest } from '../types/custom-types';
 import { isDuplicateKeyError } from '../common/utils/mongo-errors';
+import { UpdateUserSchemaType } from '../common/validation-schemas/users/update-user';
+import { encrypt } from '../common/utils/hashing';
 
-export const getUser = (_, res: Response) => {
-  res.send('get all users');
+/**
+ * Route to get the user details
+ */
+export const getUser = (req: ValidatedRequest<{}>, res: Response) => {
+  try {
+    // send the validated user
+    res.status(200).json({
+      success: true,
+      data: {
+        _id: req.userData?._id,
+        name: req.userData?.name,
+        email: req.userData?.email,
+        walletBalance: req.userData?.walletBalance,
+        profileImg: req.userData?.profileImg
+      },
+    });
+  } catch (err) {
+    // this is just kept as a fail safe
+    handleError(res, {
+      error: err,
+    });
+  }
 };
 
 /**
@@ -34,7 +56,6 @@ export const addUser = async (
       handleError(res, { message: 'User creation failed' });
       return;
     }
-    console.log(savedUser);
     // else send the res
     res.status(201).send({
       success: true,
@@ -48,5 +69,67 @@ export const addUser = async (
         : 'User creation failed',
       error: err,
     });
+  }
+};
+
+// this route is used to delete a user
+export const deleteUser = async (req: ValidatedRequest<{}>, res: Response) => {
+  try {
+    // delete the user
+    const deletedUser = await User.deleteOne({ _id: req.userData!._id });
+
+    // in case the user was not deleted
+    if (!deletedUser) {
+      handleError(res, { message: 'User deletion failed' });
+      return;
+    }
+    // else send the res
+    res.status(200).send({
+      success: true,
+      message: 'User deleted successfully',
+    });
+  } catch (err) {
+    // handle any unexpected error
+    handleError(res, {
+      error: err,
+    });
+  }
+};
+
+// update user details
+export const updateUser = async (
+  req: ValidatedRequest<UpdateUserSchemaType>,
+  res: Response
+) => {
+  // get the data from validated data
+  const validatedRequest = req.validatedData!;
+
+  try {
+    // in case we are updating password
+    if (validatedRequest?.password) {
+      validatedRequest.password = await encrypt(validatedRequest.password);
+    }
+
+    //update the user
+    const updatedUser = await User.findOneAndUpdate(
+      { _id: req.userData!._id },
+      validatedRequest,
+      { new: true } // return the updated user
+    );
+
+    if (!updatedUser) {
+      handleError(res, { message: 'User update failed' });
+      return;
+    }
+
+    // else send the res
+    res.status(200).send({
+      success: true,
+      data: updatedUser,
+      message: 'User updated successfully',
+    });
+  } catch (err) {
+    // catch any un expected error
+    handleError(res, { error: err });
   }
 };

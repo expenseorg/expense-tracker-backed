@@ -13,6 +13,7 @@ The Expense Tracker App is a web application designed to help users track and ma
 * Mongoose: MongoDB object modeling tool for TypeScript
 * Express Validator: Middleware for validating user input
 * Winston: Logging library for Node.js
+* Authentication: is achieved using Passport JWT strategy
 
 ## Getting Started
 

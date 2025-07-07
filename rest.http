@@ -1,20 +1,54 @@
 @baseUrl = http://localhost:3000
+@authToken = Bearer <token>
 ##----------------------------------------------USER -----------------------------------------
 ### get the user details by id
-GET {{baseUrl}}/api/users/:id
-
+GET {{baseUrl}}/api/users
+Authorization: {{authToken}}
 ### Add a new user
 POST {{baseUrl}}/api/users
 Content-Type: application/json
 
 {
-  "name": "john",
-  "email": "john@gmail.com",
-  "password": "john"
+  "name": "peter",
+  "email": "peter@gmail.com",
+  "password": "peter"
 }
 
+### Delete user 
+DELETE {{baseUrl}}/api/users
+Authorization: {{authToken}}
+
+### update user 
+PATCH {{baseUrl}}/api/users
+Content-Type: application/json
+Authorization: {{authToken}}
+{
+  "profileImg":"https://res.cloudinary.com/dfqbhlw0b/image/upload/v1751816178/rkdqf2oymf0nwvesw0ps.jpg"
+}
+
+##---------------------------------------------AUTH----------------------------------------------
+### login user 
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "john@gmail.com",
+  "password": "jua"
+}
 
 ##--------------------------------------------EXPENSES ----------------------------
 
 ### get all the expenses
 GET {{baseUrl}}/api/expenses
+Authorization: {{authToken}}
+
+
+##-------------------------------------------UPLOAD -------------------------
+
+### Upload an image do this in postman 
+### Create a new POST request tab.
+### body -> form data -> key = image , select file 
+### file to not be more than 1MB
+POST {{baseUrl}}/api/uploads/image
+Authorization: {{authToken}}
+
