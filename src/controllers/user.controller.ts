@@ -84,7 +84,7 @@ export const deleteUser = async (req: ValidatedRequest<{}>, res: Response) => {
       return;
     }
     // else send the res
-    res.status(200).send({
+    res.status(200).json({
       success: true,
       message: 'User deleted successfully',
     });

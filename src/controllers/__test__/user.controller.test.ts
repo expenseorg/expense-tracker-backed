@@ -16,6 +16,23 @@ let mockRequest: any = {
     profileImg: 'mock-profileImg',
   },
 };
+let mockSave = jest.fn().mockResolvedValue({
+  _id: 'mock-id',
+  name: 'mock-name',
+  email: 'mock-email',
+  walletBalance: 100,
+  profileImg: 'mock-profileImg',
+});
+
+// mock user model
+jest.mock('../../models/User.model', () => {
+  return {
+    __esModule: true,
+    default: jest.fn().mockImplementation(() => ({
+      save: mockSave,
+    })),
+  };
+});
 
 describe('GET /user', () => {
   it('should return a message', async () => {
@@ -34,22 +51,6 @@ describe('GET /user', () => {
   });
 });
 
-let mockSave = jest.fn().mockResolvedValue({
-  _id: 'mock-id',
-  name: 'mock-name',
-  email: 'mock-email',
-  walletBalance: 100,
-  profileImg: 'mock-profileImg',
-});
-// mock user model
-jest.mock('../../models/User.model', () => {
-  return {
-    __esModule: true,
-    default: jest.fn().mockImplementation(() => ({
-      save: mockSave,
-    })),
-  };
-});
 
 describe('POST /user', () => {
   beforeAll(() => {
