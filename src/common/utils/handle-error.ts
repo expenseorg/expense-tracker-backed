@@ -34,7 +34,6 @@ export const handleError = (res: Response, options: HandleErrorOptions) => {
   const statusCode = options?.statusCode ?? 500;
   // set default message configured above
   const message = options?.message ?? statusMessages[statusCode];
-
   //logger for dev mode
   if (process.env.NODE_ENV === 'development' && options?.error) {
     logger.error(JSON.stringify(options?.error, null, 2));
